@@ -1,0 +1,85 @@
+<!-- Main: Chat List -->
+
+
+<div id="content-screen">
+
+  <div class="chatlist-container">
+
+    <div class="chatlist-body">
+
+      <div class="row">
+        <h4 [ngClass]="getNavClass('nav_browsechat', isBrowseChannelsScreen())" (mouseover)="naviguate('nav_browsechat/chat')" (click)="press('next')">Browse channels</h4>
+        <h4 [ngClass]="getNavClass('nav_mychat', isMainScreen())" (mouseover)="naviguate('nav_mychat/chat')" (click)="press('next')">My Chats</h4>
+        <h4 [ngClass]="getNavClass('nav_createchat', isChannelCreationScreen())" (mouseover)="naviguate('nav_createchat/chat')" (click)="press('next')">create channel</h4>
+      </div>
+
+      <div class="main-divider"></div>
+
+      <h4>{{label}}</h4>
+
+      <!-- MAIN SCREEN WITH ALL CONVS -->
+      <div  *ngIf="isMainScreen()" class="mainScreenBody">
+        <div class="chat-div" *ngIf="!isUndefined()">
+          <!-- NO CONVERSATIONS -->
+          <!-- <div class="empty" *ngIf="!isNotEmpty()">
+            <h4>No chat yet ! Join a public chat or start a conversation with friend.</h4>
+          </div> -->
+
+          <!-- LIST -->
+          <div class="chat-div" *ngIf="isNotEmpty()">
+            <div class="chatcard" *ngFor="let chat of getChatList()">
+              <div class="chatRow">
+                <h5 class="privacy">{{getChannelIcon(chat)}}</h5>
+                <h5 [ngClass]="{'selected2' : isSelected('chat_mychat?' + getChatIndex(chat))}" (mouseover)="naviguate('chat_mychat?' + getChatIndex(chat) + '/chat')" (click)="press('next')">{{getChatName(chat)}}</h5>
+                <h5 [ngClass]="{'selected2' : isSelected('leave_mychat?' + getChatIndex(chat))}" (mouseover)="naviguate('leave_mychat?' + getChatIndex(chat) + '/chat')" (click)="press('next')">X</h5>
+              </div>
+              <!-- <div class="divider"></div> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- CONVERSATIONS LOADING -->
+        <!-- <div *ngIf="isUndefined()">
+          <div class="loader"></div>
+        </div> -->
+
+      </div>
+    <!--  -->
+
+    <!--PUBLIC CHANNELS BROWSE -->
+      <div class="mainScreenBody" *ngIf="isBrowseChannelsScreen()">
+        <div class="chatcard" *ngFor="let channel of publicChatList">
+          <div class="chatRow">
+              <h5 class="privacy">{{getNumberOfUsersLabel(channel)}}</h5>
+              <h5 [ngClass]="{'selected2' : isSelected('chat_public?' + getPublicChatIndex(channel))}" (mouseover)="naviguate('chat_public?' + getPublicChatIndex(channel) + '/chat')" (click)="press('next')">{{getChatName(channel)}}</h5>
+              <p></p>
+          </div>
+        </div>
+      </div>
+    <!--  -->
+
+    <!-- CHANNEL CREATION -->
+      <div class="channelCreationBody" *ngIf="isChannelCreationScreen()">
+        <div class="inputCase">
+          <h4>Channel name</h4>
+          <h4 [ngClass]="{'selected2': isSelected('channel-name_createchat')}" (mouseover)="naviguate('channel-name_createchat/chat')" (click)="press('next')">[{{this.newchannelName}}]</h4>
+        </div>
+
+        <div class="inputCase">
+          <h4>Password (optional)</h4>
+          <h4 [ngClass]="{'selected2': isSelected('channel-password_createchat')}" (mouseover)="naviguate('channel-password_createchat/chat')" (click)="press('next')">[{{this.newchannelPassword}}]</h4>
+        </div>
+
+        <div class="row">
+          <h4 [ngClass]="{
+            'selected2': isSelected('privacy_createchat'),
+            'privateNewChannelLabel' : newPrivacy && !isSelected('privacy_createchat'),
+            'publicNewChannelLabel' : true && ! isSelected('privacy_createchat')}" (mouseover)="naviguate('privacy_createchat/chat')" (click)="press('next')"> {{newPrivacy ? 'Private' : 'Public'}}</h4>
+        </div>
+        <h3 [ngClass]="{'selected2': isSelected('create_createchat')}" (mouseover)="naviguate('create_createchat/chat')" (click)="press('next')">Create ></h3>
+        <p></p>
+      </div>
+
+  </div>
+
+</div>

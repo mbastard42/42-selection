@@ -1,0 +1,13 @@
+# FRONTEND
+
+/angular/.angular/*
+
+# BACKEND
+
+/backend/dist/
+
+# OTHER
+
+.DS_Store
+
+.env

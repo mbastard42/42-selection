@@ -1,0 +1,193 @@
+<style>
+    .profile-container
+    {
+        display: flex;
+        flex-direction  : column;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+    }
+
+    .profile-card-body
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-card-body-left
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .profile-card-body-left-avatar img
+    {
+        width: min(15vh, 15vw);
+        height: min(15vh, 15vw);
+        border-radius: 50%;
+        border: 3px solid black;
+
+    }
+
+    .selected-profile-picture
+    {
+        border: 3px solid grey !important;
+    }
+
+    .profile-card-body-left-info
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .name-infos
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .email-info
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-card-body-right
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .right-buttons-row
+    {
+        width: 100%;
+        flex:1;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .button
+    {
+        border-radius: 10px;
+        border: none;
+        font-size: calc(min(100vh, 100vw) * 0.05);
+        font-family: var(--text-font);
+        font-style: oblique;
+        font-weight: normal;
+        color: var(--accent-color);
+        font-weight: bold;
+        background-color: transparent;
+    }
+
+
+    .button-select
+    {
+        border-radius: 10px;
+        border: none;
+        font-size: calc(min(100vh, 100vw) * 0.05);
+        background-color: var(--accent-color);
+        font-style: oblique;
+        font-weight: normal;
+        color: var(--primary-color);
+        font-weight: bold;
+        background-color: transparent;
+    }
+
+    .right-button:hover
+    {
+        background-color: var(--accent-color);
+        color: var(--main-color);
+    }
+
+
+    input{
+        font-size: calc(min(100vh, 100vw) * 0.03);
+        font-family: var(--text-font);
+        font-style: oblique;
+        font-weight: normal;
+        color: var(--accent-color);
+        font-weight: bold;
+
+        background-color: black;
+        margin-top: 1vh;
+    }
+
+    .score-container
+    {
+        overflow-y: scroll;
+    }
+
+    .input-file{
+        display: none;
+    }
+</style>
+
+<div id="content-screen">
+
+<div class="profile-container">
+    <!-- <div [style.margin-top.vh]="10"></div> -->
+    <div class="profile-card-body">
+        <div class="profile-card-body-left" *ngIf="!doShowTFA()">
+            <div class="profile-card-body-left-avatar">
+                <img [ngClass]="{'selected-profile-picture' : isSelected('profile_edit_avatar')}" [src]="getAvatar()" alt="Avatar"  (mouseover)="naviguate('profile_edit_avatar/profile')" (click)="press('next')"> 
+                <input class="input-file" type="file" #fileInput (change)="onFileSelected($event)">
+            </div>
+            <div class="profile-card-body-left-info">
+                <div class="name-infos" *ngIf="!doShowEdit()">
+                    <h4>{{getUserName()}}</h4>
+                </div>
+                <div class="name-infos" *ngIf="doShowEdit()">
+                   <h4 [ngClass]="isSelected('profile_edit_name') ? 'button-select' : 'button'" (mouseover)="naviguate('profile_edit_name/profile')" (click)="press('next')">[{{getUserName()}}]</h4>
+                </div>
+                <div class="email-info">
+                    <h5>e-mail: {{getEmail()}}</h5>
+                </div>
+            </div>
+        </div>
+        <!-- ---------------------_RIGHT INFOS_ ------------------------>
+        <!-- MAIN BUTTONS -->
+        <div [style.margin-top.vh]="5"></div>
+
+        <div class="profile-card-body-right">
+            <div class="right-buttons-row" *ngIf="doShowMain()">
+                <h4 [ngClass]="isSelected('profile_friendlist') ? 'button-select' : 'button'"  (mouseover)="naviguate('profile_friendlist/profile')" (click)="press('next')">Friends</h4>
+                <h4 [ngClass]="isSelected('profile_2FA') ? 'button-select' : 'button'" (mouseover)="naviguate('profile_2FA/profile')" (click)="press('next')">{{getIsTFAActiveLabel()}}</h4>
+                <h4 [ngClass]="isSelected('profile_edit') ? 'button-select' : 'button'" (mouseover)="naviguate('profile_edit/profile')" (click)="press('next')">Edit</h4>
+
+            </div>
+            <!-- 2 FACTOR AUTHENTICATION  -->
+            <div class="profile-card-body-right-buttons" *ngIf="doShowTFA()">
+                <div *ngIf="doShowQRCode()">
+                    <h4 [ngClass]="isSelected('profile_2FA_back') ? 'button-select' : 'button'" (mouseover)="naviguate('profile_2FA_back/profile')" (click)="press('next')">< back</h4>
+                    <h4>Use the google authenticator app</h4>
+                    <qr-code [value]="QRCodeUrl" size="250" errorCorrectionLevel="M"></qr-code>
+                    <h3>or manualy: {{TFAsecret}}</h3>
+                </div>
+                <div *ngIf="!doShowQRCode()">
+                    <h3>Qr code is loading...</h3>
+                </div>
+            </div>
+            <div class="profile-card-body-right-buttons" *ngIf="doShowEdit()">
+                <h4 [ngClass]="isSelected('profile_edit_save') ? 'button-select' : 'button'" (mouseover)="naviguate('profile_edit_save/profile')" (click)="press('next')">Save</h4>
+                <h4 [ngClass]="isSelected('profile_edit_cancel') ? 'button-select' : 'button'" (mouseover)="naviguate('profile_edit_cancel/profile')" (click)="press('next')">Cancel</h4>
+            </div>
+        </div>
+    </div>
+    <div #scrollContainer class="score-container" *ngIf="!doShowTFA()">
+        <div [style.margin-top.vh]="5"></div>
+        <app-score [userName]="getUsernameFromService()"></app-score>
+    </div>
+</div>
+
+</div>

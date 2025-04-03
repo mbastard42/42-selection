@@ -1,0 +1,32 @@
+<div id="content-screen">
+
+    <div id="title">
+        <h3>Select A Game Mode</h3>
+    </div>
+
+    <div id="line"></div>
+
+    <div id="content" *ngIf="!isLogIn()">
+        <h4>You must be log to play.</h4>
+    </div>
+
+    <div id="content" *ngIf="isLogIn()">
+
+        <div class="paddle">
+            <div class="ball" *ngIf="isSelected('classic_game')"></div>
+            <div class="button" [ngClass]="{'selected4': isSelected('classic_game')}" (mouseover)="naviguate('classic_game/game')" (click)="press('next')"><h4 [ngClass]="{'selected5': isSelected('classic_game')}">CLASSIC</h4></div>
+        </div>
+        
+        <div class="paddle">
+            <div class="ball" *ngIf="isSelected('power_game')"></div>
+            <div class="button" [ngClass]="{'selected4': isSelected('power_game')}" (mouseover)="naviguate('power_game/game')" (click)="press('next')"><h4 [ngClass]="{'selected5': isSelected('power_game')}">POWER</h4></div>
+        </div>
+
+        <div class="paddle">
+            <div class="ball" *ngIf="isSelected('solo_game')"></div>
+            <div class="button" [ngClass]="{'selected4': isSelected('solo_game')}" (mouseover)="naviguate('solo_game/game')" (click)="press('next')"><h4 [ngClass]="{'selected5': isSelected('solo_game')}">SOLO</h4></div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,18 @@
+SO ./textures/wall/metal.xpm
+WE ./textures/wall/ojingeo.xpm
+EA ./textures/wall/coucou.txt
+F 235,100,0
+C 225,255,255
+NO ./textures/wall/brick.xpm
+
+111111111
+100000001
+100101001
+10001 101
+100001001
+111111111
+111111111
+100000001
+100000001
+1000N0001
+111111111

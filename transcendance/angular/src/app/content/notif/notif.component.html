@@ -1,0 +1,9 @@
+<!-- <div id="content-screen"> -->
+
+<div class="container">
+    <div *ngFor="let alert of getNotifs()" [id]="getAlertId(alert)" class="alert">
+        <h5>{{alert}}</h5>
+    </div>
+</div>
+
+<!-- </div> -->

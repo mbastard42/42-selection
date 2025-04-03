@@ -1,0 +1,17 @@
+<div id="content-screen">
+    
+    <div id="title">
+        <h3>Da Pong [the game]</h3>
+    </div>
+
+    <div id="line"></div>
+    <h4 class="loged" *ngIf="isLog()">Logged as {{getUsername()}}</h4>
+
+    <div id="menu">
+        <h4 [ngClass]="{'selected': isSelected('menu_game')}" (mouseover)="naviguate('menu_game/')" (click)="press('next')">PLAY</h4>
+        <h4 *ngIf="!isLog()" [ngClass]="{'selected': isSelected('menu_login')}" (mouseover)="naviguate('menu_login/')" (click)="press('next')">LOGIN / REGISTER</h4>
+        <h4 [ngClass]="{'selected': isSelected('menu_settings')}" (mouseover)="naviguate('menu_settings/')" (click)="press('next')">SETTINGS</h4>
+        <h4 *ngIf="isLog()" [ngClass]="{'selected': isSelected('menu_logout')}"  (mouseover)="naviguate('menu_logout/')" (click)="press('next')">LOGOUT</h4>
+    </div>
+  
+</div>

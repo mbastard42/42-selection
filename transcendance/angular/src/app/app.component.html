@@ -1,0 +1,46 @@
+<div id="page">
+
+  <div id="main-title"> <h1>- TRANSCENDANCE -</h1> </div>
+
+  <div class="control" id="left-control">
+    <div id="cross">
+      <button [ngClass]="{'selected': whenKey('up')}" class="button left-button" id="up" (mousedown)="press('up')">
+        <h2 [ngClass]="{'h2-selected': whenKey('up')}">{{ getKey('up') }}</h2>
+      </button>
+      <button [ngClass]="{'selected': whenKey('left')}" class="button left-button" id="left" (mousedown)="press('left')">
+        <h2 [ngClass]="{'h2-selected': whenKey('left')}">{{ getKey('left') }}</h2>
+      </button>
+      <button [ngClass]="{'selected': whenKey('down')}" class="button left-button" id="down" (mousedown)="press('down')">
+        <h2 [ngClass]="{'h2-selected': whenKey('down')}">{{ getKey('down') }}</h2>
+      </button>
+      <button [ngClass]="{'selected': whenKey('right')}" class="button left-button" id="right" (mousedown)="press('right')">
+        <h2 [ngClass]="{'h2-selected': whenKey('right')}">{{ getKey('right') }}</h2>
+      </button>
+    </div>
+  </div>
+
+  <div id="screen">
+    <app-notif></app-notif>
+  </div>
+
+  <div class="control" id="right-control">
+    <button [ngClass]="{'selected': whenKey('next')}" class="button right-button" id="a" (click)="press('next')">
+      <h2 [ngClass]="{'h2-selected': whenKey('next')}">{{ getKey('next') }}</h2>
+    </button>
+    <button [ngClass]="{'selected': whenKey('prev')}" class="button right-button" id="b" (click)="press('prev')">
+      <h2 [ngClass]="{'h2-selected': whenKey('prev')}">{{ getKey('prev') }}</h2>
+    </button>
+  </div>
+
+  <div class="control" id="bottom-control">
+    <button [ngClass]="{'selected': whenKey('select')}" class="button bottom-button" id="select" (click)="press('select')">
+      <h2 [ngClass]="{'h2-selected': whenKey('select')}">SELECT [{{ getKey('select') }}]</h2>
+    </button>
+    <button [ngClass]="{'selected': whenKey('start')}" class="button bottom-button" id="start" (click)="press('start')">
+      <h2 [ngClass]="{'h2-selected': whenKey('start')}">START [{{ getKey('start') }}]</h2>
+    </button>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>

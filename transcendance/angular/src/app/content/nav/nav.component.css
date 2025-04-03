@@ -1,0 +1,38 @@
+#content-screen {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#line {
+    width: 70%;
+    height: min(0.5vw, 0.5vh);
+
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+	display: flex;
+	justify-content: center;
+}
+#content {
+
+    height : 25vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* align-items: space-evenly; */
+}
+
+.selected-content {
+	color: green;
+}
+
+.selected-content::before {
+    content: "> ";
+}
+
+.selected-content::after {
+    content: " <";
+}

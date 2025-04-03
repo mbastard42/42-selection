@@ -1,0 +1,45 @@
+<div id="content-screen">
+
+    <div class="container">
+        <div class="game-container">
+            <div class="middle-line"></div>
+    
+            <div class="users">
+                <div class="user">
+                    <img [src]="getFirstPlayerAvatar()" alt="Avatar">
+                    <h5>{{getFirstPlayerName()}}</h5>
+                </div>
+                <div class="user">
+                    <h5>{{getSecondPlayerName()}}</h5>
+                    <img [src]="getSecondPlayerAvatar()" alt="Avatar">
+                </div>
+            </div>
+            <div class="score">
+                <h3>{{score[0]}}</h3>
+                <h3>{{score[1]}}</h3>
+            </div>
+    
+            <div class="paddle" *ngIf="!isGameEnded()" 
+            [style.height.%]="paddleSize" 
+            [style.width.%]="ballSize / 2"
+            [style.top.%]="getPaddleTop1()"></div>
+            <div class="paddle" *ngIf="!isGameEnded()" 
+            [style.height.%]="paddleSize"
+            [style.width.%]="ballSize / 2"
+            [style.top.%]="getPaddleTop2()"
+            [style.left.%]="100 - ballSize / 2"></div>
+    
+            <div class="ball" *ngIf="!isGameEnded() && !doShowLabel()" 
+            [style.top.%]="getBallTop()"
+            [style.left.%] = "getBallLeft()" 
+            [style.width.%]="ballSize"
+            [style.height.%]="ballSize"></div>
+    
+            <div class="label" *ngIf="doShowLabel()">
+                <h4>{{label}}</h4>
+            </div>
+    
+        </div>
+    </div>
+    
+    </div>

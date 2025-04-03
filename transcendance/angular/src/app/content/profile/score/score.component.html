@@ -1,0 +1,138 @@
+<style>
+
+    h5{
+        color: white;
+
+    }
+
+    h4 {
+        color: white;
+    }
+    .score-container
+    {
+        display: flex;
+        flex-direction  : column;
+        justify-content: center;
+        color: black;
+    }
+
+    .score-container-history
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 90%;
+    }
+
+    .history
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .level{
+        display: flex;
+        flex-direction  : column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .progressBar
+    {
+        position: relative;
+        width: 80%;
+        height: 3vh;
+        background-color: #ddd;
+        border: 1px solid #333;
+    }
+
+    .progress{
+        height: 100%;
+        background-color: #4CAF50;
+        text-align: center;
+        line-height: 3vh;
+        color: white;
+    }
+
+    .levelBarText
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: black;
+        text-align: center;
+        line-height: 3vh;
+    }
+
+    .statRow{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+    }
+
+    .divider{
+        margin-top: 5%;
+        margin-bottom: 5%;
+        width: 100%;
+        height: 1px;
+        background-color: white;
+    }
+
+    img{
+        width: min(5vw, 5vh);
+        height: min(5vw, 5vh);
+        border-radius: 50%;
+    }
+
+    .user{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+</style>
+
+<div class="score-container">
+    <div class="level">
+        <h5>{{getRankLabel(level.rank)}}</h5>
+        <div class="progressBar">
+            <div class="progress" [style.width]="getProgress() + '%'"></div>
+            <div class="levelBarText">
+                level {{level.lvl}} - {{getProgress()}} %
+            </div>
+        </div>
+    </div>
+    <div [style.margin-top.vh]="5"></div>
+    <div class="divider"></div>
+    <div class="statRow">
+        <h5>Total game: {{getTotalGame()}}</h5>
+        <h5>Wins: {{getWinGame()}}</h5>
+        <h5>Ratio: {{getWinRate()}} %</h5>
+    </div>
+    <div [style.margin-top.vh]="2"></div>
+    <div class="divider"></div>
+    <h4>History: </h4>
+    <div [style.margin-top.vh]="2"></div>
+    <div class="history">
+        <div class="score-container-history">
+            <h5>Opponent</h5>
+            <h5>Score</h5>
+            <h5>Result</h5>
+        </div>
+        <div [style.margin-top.%]="5"></div>
+        <div class="score-container-history" *ngFor="let game of getScoreArray()">
+            <div class="user">
+                <img [src]="getAvatar(game)" alt="Avatar">
+                <div [style.margin-left.vw]="0.5"></div>
+                <h5>{{getOtherUsername(game)}}</h5>
+            </div>
+            <h5>{{game.score[0]}} / {{game.score[1]}}</h5>
+            <h5>{{isUserWin(game)}}</h5>
+        </div>
+    </div>
+    <div [style.margin-top.%]="5"></div>
+</div>

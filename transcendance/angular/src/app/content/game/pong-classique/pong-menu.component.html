@@ -1,0 +1,31 @@
+<div id="content-screen">
+
+    <h3 *ngIf="!isLogged()">You must be log to play</h3>
+
+    <div class="game_container" *ngIf="isLogged()">
+
+        <h3>Pong classique</h3>
+
+        <div class="body">
+
+            <h4 *ngIf="!isSearchingGame() && !isSearchWatching()" [ngClass]="isSelected('play_game') ? 'selected' : 'button'" (mouseover)="naviguate('play_game/game/pong')" (click)="press('next')">{{playButtonLabel()}}</h4>
+            <h4  *ngIf="!isSearchWatching() && !isSearchingGame()" [ngClass]="isSelected('watch_game') ? 'selected' : 'button'" (mouseover)="naviguate('watch_game/game/pong')" (click)="press('next')">Watch game</h4>
+
+            <div *ngIf="isSearchingGame() || isSearchWatching()">
+                <h4 [ngClass]="isSelected('cancel_search') ? 'selected' : 'button' " (mouseover)="naviguate('cancel_search/game/pong')" (click)="press('next')">Cancel</h4>
+            </div>
+
+            <h5 >{{label}}</h5>
+
+            <div #gameWatchScrollContainer class="foundGamesDiv" *ngIf="isSearchWatching()">
+                <div #gameWatchDiv [ngClass]="isSelected('watch_game_id' + games.id) ? 'selected' : 'button' "  class="currentGameRow" *ngFor="let games of getCurrentGames()" (mouseover)="naviguate('watch_game_id' + games.id + '/game/pong')" (click)="press('next')">
+                        <h5>|{{games.id}}|</h5>
+                        <h5>{{getGameName(games.players)}}</h5>
+                </div>
+            </div>
+
+        </div>
+
+        <p></p>
+    </div>
+</div>

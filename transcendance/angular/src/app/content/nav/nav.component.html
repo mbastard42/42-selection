@@ -1,0 +1,15 @@
+<div id="content-screen">
+    
+    <h3>Quick Access</h3>
+
+    <div id="line"></div>
+
+    <div id="content">
+        <h4 [ngClass]="{'selected-content': isSelected('quick_game')}" (mouseover)="naviguate('quick_game/nav')" (click)="press('next')">Games</h4>
+        <h4 [ngClass]="{'selected-content': isSelected('quick_profile')}" (mouseover)="naviguate('quick_profile/nav')" (click)="press('next')">Profil</h4>
+        <h4 [ngClass]="{'selected-content': isSelected('quick_friend')}" (mouseover)="naviguate('quick_friend/nav')" (click)="press('next')">Friends</h4>
+        <h4 [ngClass]="{'selected-content': isSelected('quick_chat')}" (mouseover)="naviguate('quick_chat/nav')" (click)="press('next')">Messages</h4>
+        <h4 [ngClass]="{'selected-content': isSelected('quick_settings')}" (mouseover)="naviguate('quick_settings/nav')" (click)="press('next')">Settings</h4>
+    </div>
+
+</div>

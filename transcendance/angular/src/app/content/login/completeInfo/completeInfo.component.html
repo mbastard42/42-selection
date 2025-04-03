@@ -1,0 +1,22 @@
+<div id="content-screen">
+
+    <h3>{{canConfigUser() ? 'Complete Info' : 'You can\'t access this page'}}</h3>
+
+    <div id="line"></div>
+
+    <div class="infoCompleteScreen" *ngIf="canConfigUser()">
+        <div class="infosComplete">
+            <div class="infoscase">
+                <h4>Profile pic</h4>
+                <img [ngClass]="isSelected('completeInfo_avatar') ? 'selected-profile-picture' : 'profile-picture'" [src]="getAvatarUrl()" alt="profile pic" (mouseover)="naviguate('completeInfo_avatar/login/info')" (click)="press('next')">
+                <input class="input-file" type="file" #fileInput (change)="onFileSelected($event)">
+            </div>
+            <div class="infoscase">
+                <h4 [ngClass]="{'selected2': isSelected('completeInfo_username')}" (mouseover)="naviguate('completeInfo_username/login/info')" (click)="press('next')">Username: [{{this.username}}]</h4>
+            </div>
+            <h5 [ngClass]="{'selected2': isSelected('completeInfo_done')}" (mouseover)="naviguate('completeInfo_done/login/info')" (click)="press('next')">- Done -</h5>
+            <p></p>
+        </div>
+    </div> 
+
+</div>

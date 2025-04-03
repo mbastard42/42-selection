@@ -1,0 +1,186 @@
+.chatlist-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  .chatlist-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-divider{
+    width: 100%;
+    height: 1px;
+    background-color: grey;
+    margin-bottom: 10px;
+  }
+
+
+  .navLabel{
+    color: grey;
+    padding: min(0.5vh, 0.5vw);
+  }
+
+    .navLabel-selected, .navLabel-active {
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+        background-clip: text;
+        color: transparent;
+    }
+
+  .row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+
+  /* MAIN SCREEN BODY */
+  .mainScreenBody{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+  }
+
+  .chat-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .chatcard {
+    width: 90%;
+    padding: 2vh;
+  }
+
+  .chatcard-name:hover {
+    color: grey;
+  }
+
+  .chatRow{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatRow:hover{
+      cursor: pointer;
+  }
+
+  .chatLeave{
+    color: grey;
+  }
+
+  .chatLeave:hover{
+    color: var(--accent-color);
+  }
+
+  .divider{
+    width: 100%;
+    height: 1px;
+    background-color: lightgray
+  }
+
+  .loader {
+  border: 3px solid #f3f3f3; /* Light grey */
+  border-top: 3px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+  /* CHANNEL CREATION BODY */
+
+  .channelCreationBody{ 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .publicNewChannelLabel{
+    color: green;
+  }
+
+  .publicNewChannelLabel:hover{
+    cursor: pointer;
+    color: darkgreen;
+  }
+
+  .privateNewChannelLabel{
+    color: red;
+  }
+
+  .privateNewChannelLabel:hover{
+    cursor: pointer;
+    color: darkred;
+  }
+
+  .createLabel:hover{
+    color: grey;
+    cursor: pointer;
+  }
+
+  .inputCase{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inputCase input{
+    font-size: calc(min(100vh, 100vw) * 0.05);
+    font-family: var(--text-font);
+    font-style: oblique;
+    font-weight: normal;
+    color: var(--accent-color);
+    font-weight: bold;
+
+    background-color: black;
+    margin-top: 3vh;
+  }
+
+  .closeLabel{
+    color: grey;
+  }
+
+  .closeLabel:hover{
+    cursor: pointer;
+  }
+
+  /* CHANNEL BROWSE SCREEN */
+    .joinChannelButton{
+      color: var(--accent-color);
+    }
+
+    .joinChannelButton:hover{
+      cursor: pointer;
+      color: grey;
+    }
+
+    .privacy{
+      color: grey;
+    }
+
+    h4 { font-size: calc(min(100vh, 100vw) * 0.04); }
+    h5 { font-size: calc(min(100vh, 100vw) * 0.035); }
+

@@ -1,0 +1,25 @@
+<div id="content-screen">
+
+    <h3>{{isLogin() ? 'You are already log' : 'Sign Up'}}</h3>
+
+    <div id="line"></div>
+
+
+    <div id="content" *ngIf="!isLogin()">
+
+        <h4 [ngClass]="{'selected2': isSelected('register_email')}" (mouseover)="naviguate('register_email/login/register')" (click)="press('next')">Email: [{{this.email}}]</h4>
+        <h4 [ngClass]="{'selected2': isSelected('register_password')}" (mouseover)="naviguate('register_password/login/register')" (click)="press('next')">Password: [{{this.password1}}]</h4>
+        <h4 [ngClass]="{'selected2': isSelected('register_password2')}" (mouseover)="naviguate('register_password2/login/register')" (click)="press('next')">Confirm: [{{this.password2}}]</h4>
+
+        <h5 [ngClass]="{'selected2': isSelected('register_done')}" (mouseover)="naviguate('register_done/login/register')" (click)="press('next')">- Done -</h5>
+
+        <div id="line"></div>
+
+        <div class="double">
+            <h5 [ngClass]="{'selected2': isSelected('register_42')}" (mouseover)="naviguate('register_42/login/register')" (click)="press('next')">- Login 42 -</h5>
+            <h5 [ngClass]="{'selected2': isSelected('register_gotologin')}" (mouseover)="naviguate('register_gotologin/login/register')" (click)="press('next')">- Login -</h5>
+        </div>
+
+    </div>
+
+</div>

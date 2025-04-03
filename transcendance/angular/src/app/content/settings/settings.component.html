@@ -1,0 +1,51 @@
+<div id="content-screen">
+
+    <div id="title">
+        <h3>Settings</h3>
+    </div>
+
+    <div id="top-content">
+
+        <div id="left-content">
+
+            <div id="cross">
+                <div class="button" [ngClass]="{'b-selected': isSelected('up')}" class="button left-button" id="up" (mouseover)="naviguate('up/settings')" (click)="press('next')">
+                    <h6 [ngClass]="{'h-selected': isSelected('up')}">{{ getKey('up') }}</h6>
+                </div>
+                <div class="button" [ngClass]="{'b-selected': isSelected('left')}" class="button left-button" id="left" (mouseover)="naviguate('left/settings')" (click)="press('next')">
+                    <h6 [ngClass]="{'h-selected': isSelected('left')}">{{ getKey('left') }}</h6>
+                </div>
+                <div class="button" [ngClass]="{'b-selected': isSelected('down')}" class="button left-button" id="down" (mouseover)="naviguate('down/settings')" (click)="press('next')">
+                    <h6 [ngClass]="{'h-selected': isSelected('down')}">{{ getKey('down') }}</h6>
+                </div>
+                <div class="button" [ngClass]="{'b-selected': isSelected('right')}" class="button left-button" id="right" (mouseover)="naviguate('right/settings')" (click)="press('next')">
+                    <h6 [ngClass]="{'h-selected': isSelected('right')}">{{ getKey('right') }}</h6>
+                </div>
+            </div>
+        </div>
+
+        <div id="center-content">
+            <div id="info"><h5>{{ this.info }}</h5></div>
+        </div> 
+
+        <div id="right-content">
+            <div class="button" [ngClass]="{'b-selected': isSelected('next')}" class="button right-button" id="a" (mouseover)="naviguate('next/settings')" (click)="press('next')">
+                <h5 [ngClass]="{'h-selected': isSelected('next')}">{{ getKey('next') }}</h5>
+            </div>
+            <div class="button" [ngClass]="{'b-selected': isSelected('prev')}" class="button right-button" id="b" (mouseover)="naviguate('prev/settings')" (click)="press('next')">
+                <h5 [ngClass]="{'h-selected': isSelected('prev')}">{{ getKey('prev') }}</h5>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="bottom-content">
+        <div class="button" [ngClass]="{'b-selected': isSelected('select')}" class="button bottom-button" id="select" (mouseover)="naviguate('select/settings')" (click)="press('next')">
+            <h6 [ngClass]="{'h-selected': isSelected('select')}">{{ getKey('select') }}</h6>
+        </div>
+        <div class="button" [ngClass]="{'b-selected': isSelected('start')}" class="button bottom-button" id="start" (mouseover)="naviguate('start/settings')" (click)="press('next')">
+            <h6 [ngClass]="{'h-selected': isSelected('start')}">{{ getKey('start') }}</h6>
+        </div>
+    </div>
+    
+</div>

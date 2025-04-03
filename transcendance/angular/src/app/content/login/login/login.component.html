@@ -1,0 +1,24 @@
+<div id="content-screen">
+
+    <h3>{{isLogin() ? 'You are already log' : completeInfos ? 'Complete your infos': 'Sign In'}}</h3>
+
+    <div id="line"></div>
+
+    <div id="content" *ngIf="!completeInfos && !isLogin()">
+        
+        <h4 [ngClass]="{'selected2': isSelected('login_email')}" (mouseover)="naviguate('login_email/login')" (click)="press('next')">Email: [{{this.email}}]</h4>
+        <h4 [ngClass]="{'selected2': isSelected('login_password')}" (mouseover)="naviguate('login_password/login')" (click)="press('next')">Password: [{{this.password}}]</h4>
+        <h4 *ngIf="TFAneeded" [ngClass]="{'selected2': isSelected('login_TFA')}" (mouseover)="naviguate('login_TFA/login')" (click)="press('next')">TFA code: [{{TFACode}}]</h4>
+        <h5 [ngClass]="{'selected2': isSelected('login_done')}" (mouseover)="naviguate('login_done/login')" (click)="press('next')">- Done -</h5>
+        
+        <div id="line"></div>
+
+        <div class="double">
+            <h5 [ngClass]="{'selected2': isSelected('login_42')}" (mouseover)="naviguate('login_42/login')" (click)="press('next')">- Login 42 -</h5>
+            <h5 [ngClass]="{'selected2': isSelected('login_gotoregister')}" (mouseover)="naviguate('login_gotoregister/login')" (click)="press('next')">- Register -</h5>
+        </div>
+        
+    </div>
+
+
+</div>

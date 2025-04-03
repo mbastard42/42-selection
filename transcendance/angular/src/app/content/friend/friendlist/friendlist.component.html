@@ -1,0 +1,87 @@
+<style>
+    .friendList-container {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        height: 100%;
+        width: 100%;
+    }
+
+    .friends{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        border-bottom: 1px solid grey;
+        margin-bottom: 10px;
+    }
+
+    .friendList-header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    
+    /* .status{
+        color: orange;
+    } */
+
+    .friendName:hover {
+        color : pink;
+        cursor: pointer;
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        background-color: grey;
+        margin-bottom: 10px;
+    }
+
+    .search-button
+    {
+        border-radius: 10px;
+        border: none;
+        font-size: calc(min(100vh, 100vw) * 0.05);
+        font-family: var(--text-font);
+        font-style: oblique;
+        font-weight: normal;
+        color: var(--accent-color);
+        font-weight: bold;
+        background-color: transparent;
+    }
+
+    .search-button-selected
+    {
+        border-radius: 10px;
+        border: none;
+        font-size: calc(min(100vh, 100vw) * 0.05);
+        font-family: var(--text-font);
+        font-style: oblique;
+        font-weight: normal;
+        color: var(--main-color);
+        font-weight: bold;
+        background-color: var(--accent-color);
+    }
+
+</style>
+
+<div id="content-screen">
+    <div class="friendList-container">
+        <div class="friendList-header">
+            <h3>Friend List</h3>
+            <h4 [ngClass]="isSelected('friend_search') ? 'search-button-selected' : 'search-button'" (mouseover)="naviguate('friend_search/friend')" (click)="press('next')">Search</h4>
+        </div>
+        <div class="divider"></div>
+        <div *ngFor="let friend of getFriendList()" class="friends">
+            <h4 [ngClass]="{'selected2' : isSelected('friend_number?' + getFriendIndex(friend))}" (mouseover)="naviguate('friend_number?' + getFriendIndex(friend) + '/friend')" (click)="press('next')">{{friend.name}}</h4>
+            <h4 [style.color]="getStatusColor(friend.status)">{{friend.status}}</h4>
+            <h4 [ngClass]="{'selected2' : isSelected('friendchat_number?' + getFriendIndex(friend))}" (mouseover)="naviguate('friendchat_number?' + getFriendIndex(friend) + '/friend')" (click)="press('next')">chat</h4>
+        </div>
+        <div *ngIf="FriendListEmpty()">
+            <h4>No friend yet ! Search for players to add them.</h4>
+        </div>
+    </div>
+</div>

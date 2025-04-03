@@ -1,0 +1,368 @@
+<style>
+  
+  p {
+
+	font-size: calc(min(100vh, 100vw) * 0.025);
+	font-family: var(--text-font);
+	font-style: oblique;
+	font-weight: bold;
+  padding-left: 1vw;
+  padding-right: 1vw;
+	color: var(--accent-color);
+}
+
+  .container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+
+  .chat-container{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+ 
+  .chat-messages {
+      height: 90%;
+      width: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      border: 1px solid black;
+    }
+
+    .chat-messages-selected {
+      height: 90%;
+      width: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      border: 1px solid white;
+    }
+    
+    .chat-body {
+      width: 100%;
+      height: fit-content;
+    }
+  
+    .senderMsg {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      color: white;
+    }
+
+    .receiverMsg {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      color: white;
+    }
+
+    .senderMsg .msg-box{
+      background-color: rgb(163, 8, 194);
+
+    }
+
+    .receiverMsg .msg-box{
+      background-color: rgb(80, 80, 80);
+    }
+
+    .annonceMsg{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      color: var(--accent-color);
+    }
+
+    .msg-box{
+      border-radius: 15px;
+      display: flex;
+      margin-top: 2px;
+      flex-direction: column;
+    }
+
+    .selected-msg-box{
+      border-radius: 15px;
+      background-color: saddlebrown;
+      display: flex;
+      margin-top: 2px;
+      flex-direction: column;
+    }
+
+    .close-btn{
+      background-color: transparent;
+      border: 0;
+      
+    }
+
+    .bar {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: black;
+      margin-bottom: 10px;
+    }
+
+    .row
+    {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .loader-container{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader {
+      border: 5px solid #f3f3f3; /* Light grey */
+      border-top: 5px solid rgb(163, 8, 194); /* Blue */
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 2s linear infinite;
+      margin: auto;
+      margin-top: 20%;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+  .inputCase{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .updateButton{
+    padding: 2vh;
+  }
+
+  .updateButton:hover{
+    cursor: pointer;
+    color: grey;
+  }
+
+  .userScreen{
+    height: 100%;
+    width: 100%;
+  }
+
+  .friendListScreen{
+    height: 100%;
+    width: 100%;
+  }
+
+  .settingScreen{
+    height: 100%;
+    width: 100%;
+  }
+
+  .settingScreenBody{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+  }
+  .chatIsPrivateLabel{
+    color: red;
+    cursor: pointer;
+  }
+
+  .chatIsPublicLabel{
+    color: green;
+    cursor: pointer;
+  }
+  
+  .search-input{
+        border-radius: 10px;
+        border: none;
+        font-size: calc(min(100vh, 100vw) * 0.05);
+        font-family: var(--text-font);
+        font-style: oblique;
+        font-weight: normal;
+        color: var(--accent-color);
+        font-weight: bold;
+        background-color: transparent;
+    }
+
+    .search-input-selected{
+        border-radius: 10px;
+        border: none;
+        font-size: calc(min(100vh, 100vw) * 0.05);
+        font-family: var(--text-font);
+        font-style: oblique;
+        font-weight: normal;
+        color: grey;
+        font-weight: bold;
+        background-color: white
+    }
+
+  </style>
+
+  <!-- CHAT SCREEN -->
+  <div id="content-screen">
+
+    <div class="container" *ngIf="isChatLoaded()">
+
+      <div class= "chat-container" *ngIf="isInChat()">
+
+        <div class="row" [style.width.%]="90">
+          <h4 [ngClass]="{'selected2' : isSelected('userlist_open')}" (mouseover)="naviguate(chatRoute('userlist_open'))" (click)="press('next')">{{!isDirectChat() ? 'Users' : ''}}</h4>
+          <h4>{{getChatName()}}</h4>
+          <h4 [ngClass]="{'selected2' : isSelected('settings_open')}" *ngIf="isOwner()" (mouseover)="naviguate(chatRoute('settings_open'))" (click)="press('next')">{{isOwner() ? 'Settings' : ''}}</h4>
+          <h4 *ngIf="isDirectChat() || (!isOwner() && !isDirectChat())"></h4>
+        </div>
+
+        <div class="divider"></div>
+
+        <div #scrollContainer [ngClass]="isSelected('messages_case') ? 'chat-messages-selected' : 'chat-messages'">
+          <div #messageDiv class="chat-body" *ngFor="let message of getMessages()">
+            <div *ngIf="!isFromBlockedUser(message.user_id)" [ngClass]="isAnnonce(message) ? 'annonceMsg' : isUserMessage(message) ? 'senderMsg' : 'receiverMsg'">
+
+              <div [ngClass]="isSelected('message?' + getMessageIndex(message, true) + '_chat') ? 'selected-msg-box' : 'msg-box'" (mouseover)="naviguate(chatRoute('message?' + getMessageIndex(message, true) + '_chat'))" (click)="press('next')">
+                <p *ngIf="!isCommand(message.content) && !isUserMessage(message) && !isAnnonce(message)">{{getUserNameFromId(message.user_id)}}: {{message.content}}</p>
+                <p *ngIf="(!isCommand(message.content) && isUserMessage(message)) || isAnnonce(message)">{{message.content}}</p>
+                <p class="clickableLabel" *ngIf="isCommand(message.content)" >{{getCommandLabel(message)}}</p>
+              </div>
+              <!-- <button class="close-btn" *ngIf="isUserMessage(message)" >X</button> -->
+    
+            </div>
+          </div>    
+        </div>
+
+      </div>
+
+      <div *ngIf="isInChat()" class="bar">
+        <h4 [ngClass]="{'selected2' : isSelected('defi_button')}"  (mouseover)="naviguate(chatRoute('defi_button'))" (click)="press('next')">Defi</h4>
+        <input
+        #messageInput
+        type="text"
+        (mouseover)="naviguate(chatRoute('msg_input'))" 
+        (click)="press('next')"
+        readonly
+        [ngClass]="isSelected('msg_input') ? 'search-input-selected' : 'search-input'"
+        [(ngModel)]="writingMessage"
+        placeholder="Entrez votre message ici..."
+        />
+      </div>
+
+      <!-- USERS LIST SCREEN -->
+
+      <div class="userScreen" *ngIf="isInUserList()">
+        <div class="row">
+          <h4 [ngClass]="{'selected2' : isSelected('close_userlist')}" (mouseover)="naviguate(chatRoute('close_userlist'))" (click)="press('next')" >X</h4>
+          <h4>Users</h4>
+          <h4 [ngClass]="{'selected2' : isSelected('invitefriend_userlist')}" (mouseover)="naviguate(chatRoute('invitefriend_userlist'))" (click)="press('next')" >{{isAdmin() ? '+' : ''}}</h4>
+        </div>
+        <div class="divider"></div>
+        <div class="chat-messages">
+          <div class="chat-body" *ngFor="let username of getUsernameList()">
+            <div class="row" *ngIf="!isCurrentUser(username)">
+              <h4 [ngClass]="{'selected2' : isUserSelected(username)}" (mouseover)="naviguate(chatRoute('user?' + getUsernameIndex(username) + '_userlist'))" (click)="press('next')">{{username}}</h4>
+              <h4 *ngIf="isBlockUser(username)"> |blocked|</h4>
+              <div [style.margin-left.vw]="2"></div>
+              <div class="row" *ngIf="isUserSelected(username)">
+                <h5 [ngClass]="{'selected2' : isSelected('userKick?' + getUsernameIndex(username) + '_userlist')}" (mouseover)="naviguate(chatRoute('userKick?' + getUsernameIndex(username) + '_userlist'))" (click)="press('next')">{{isAdmin() ? 'KICK' : ''}}</h5>
+                <h5 [ngClass]="{'selected2' : isSelected('userBan?' + getUsernameIndex(username) + '_userlist')}" (mouseover)="naviguate(chatRoute('userBan?' + getUsernameIndex(username) + '_userlist'))" (click)="press('next')">{{isAdmin() ? 'BAN' : ''}}</h5>
+                <h5 [ngClass]="{'selected2' : isSelected('userMute?' + getUsernameIndex(username) + '_userlist')}" (mouseover)="naviguate(chatRoute('userMute?' + getUsernameIndex(username) + '_userlist'))" (click)="press('next')">{{isAdmin() ? 'MUTE' : ''}}</h5>
+                <h5 [ngClass]="{'selected2' : isSelected('userAdmin?' + getUsernameIndex(username) + '_userlist')}" (mouseover)="naviguate(chatRoute('userAdmin?' + getUsernameIndex(username) + '_userlist'))" (click)="press('next')">{{isOwner() ? isUserAdmin(username) ? 'DEMUTE' : 'PROMUTE' : ''}}</h5>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="getBanUsernameList().length > 0">
+            <h3>Banned users</h3>
+            <div class="divider"></div>
+            <div class="chat-body" *ngFor="let username of getBanUsernameList()">
+              <div class="row">
+                <h4 [ngClass]="{'selected2' : isSelected('user?' + getUsernameBanIndex(username) + '_userBanlist')}" (mouseover)="naviguate(chatRoute('user?' + getUsernameBanIndex(username) + '_userBanlist'))" (click)="press('next')">{{username}}</h4>
+                <h5 [ngClass]="{'selected2' : isSelected('userUnban?' + getUsernameBanIndex(username) + '_userBanlist')}"  *ngIf="isOwner() || isAdmin" (mouseover)="naviguate(chatRoute('userUnban?' + getUsernameBanIndex(username) + '_userBanlist'))" (click)="press('next')">UNBAN</h5>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- INVITE FRIENDS LIST -->
+
+      <div class="friendListScreen" *ngIf="isInInviteFriend()">
+        <div class="row">
+          <h4 [ngClass]="{'selected2' : isSelected('close_invitefriend')}" (mouseover)="naviguate(chatRoute('close_invitefriend'))"  (click)="press('next')">X</h4>
+          <h4>Invite friends</h4>
+          <h4></h4>
+        </div>
+        <div class="divider"></div>
+        <div class="chat-messages">
+          <div class="chat-body" *ngFor="let username of getFriendList()">
+            <div class="row">
+              <h4 [ngClass]="{'selected2' : isSelected('friend?' + getFriendnameIndex(username) + '_invitefriend')}" (mouseover)="naviguate(chatRoute('friend?' + getFriendnameIndex(username) + '_invitefriend'))" (click)="press('next')">{{username}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS SCREEN -->
+
+      <div class="settingScreen" *ngIf="isInSettings()">
+        <div class="row">
+          <h4 [ngClass]="{'selected2' : isSelected('close_settings')}"  (mouseover)="naviguate(chatRoute('close_settings'))"  (click)="press('next')">X</h4>
+          <h4>Settings</h4>
+          <h4></h4>
+        </div>
+        <div class="divider"></div>
+        <div class="settingScreenBody">
+          <h3>{{getChatInfos().name}}</h3>
+          <div class="inputCase">
+            <div class="row">
+              <h4>Name: </h4>
+              <h4 [ngClass]="{'selected2' : isSelected('input-change_name')}"  (mouseover)="naviguate(chatRoute('input-change_name'))"  (click)="press('next')">[{{chatNewName}}]</h4>
+              <!-- <input type="text" [placeholder]="getChatInfos().name" [(ngModel)]="chatNewName"> -->
+            </div>
+            <h4 [ngClass]="{'selected2' : isSelected('done-change_name')}" *ngIf="isOwner()" (mouseover)="naviguate(chatRoute('done-change_name'))"  (click)="press('next')">Update channel name</h4>
+          </div>
+          <div class="inputCase">
+            <div class="row">
+              <h4>Password: </h4>
+              <h4 [ngClass]="{'selected2' : isSelected('input-change_password')}" (mouseover)="naviguate(chatRoute('input-change_password'))"  (click)="press('next')">[{{chatNewPassword}}]</h4>
+              <!-- <input *ngIf="isOwner()" type="text" placeholder="new password (let blank to remove)" [(ngModel)]="chatNewPassword"> -->
+            </div>
+            <h4 [ngClass]="{'selected2' : isSelected('done-change_password')}" *ngIf="isOwner()" (mouseover)="naviguate(chatRoute('done-change_password'))"  (click)="press('next')">Update channel password</h4>
+          </div>
+          <h4 [ngClass]="isSelected('change_privacy') ? 'selected2' : getChatInfos().isPrivate ? 'chatIsPrivateLabel' : 'chatIsPublicLabel'" (mouseover)="naviguate(chatRoute('input-change_name'))"  (click)="press('next')">{{getChannelPrivacyLabel()}}</h4>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!isChatLoaded()" class="loader-container">
+      <div class="loader"></div>
+    </div>
+
+</div>

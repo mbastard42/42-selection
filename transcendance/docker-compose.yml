@@ -1,0 +1,65 @@
+version: '3'
+
+# ----------- NETWORKS -----------
+
+networks:
+  ft_transcendance:
+    driver: bridge
+
+# ----------- SERVICES -----------
+
+services:
+
+  nginx:
+    container_name: nginx
+    networks:
+      - ft_transcendance
+    depends_on:
+      - angular
+    build: ./nginx
+    env_file: .env
+    ports:
+      - "443:443"
+    restart: on-failure
+
+  angular:
+    container_name: angular
+    env_file: .env
+    volumes:
+      - angular:/app
+    networks:
+      - ft_transcendance
+    depends_on:
+      - backend
+    build: ./angular
+    restart: on-failure
+
+  backend:
+    container_name: backend
+    env_file: .env
+    volumes:
+      - backend:/app
+    networks:
+     - ft_transcendance
+    build: ./backend
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+    restart: on-failure
+
+  database:
+    container_name: database
+    env_file: .env        
+    networks:
+      - ft_transcendance
+    build: ./database             
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: on-failure
+# ----------- VOLUMES -----------
+
+volumes:
+  postgres-data:
+  backend:
+  angular:

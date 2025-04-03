@@ -1,0 +1,75 @@
+<div id="content-screen">
+
+
+<div class="container">
+    <div class="game-container">
+        <div class="middle-line"></div>
+
+        <div class="users">
+            <div class="user">
+                <img [src]="getFirstPlayerAvatar()" alt="Avatar">
+                <h5 [ngClass]="isPlayerActive(0) ? 'active' : 'inactive'">{{getFirstPlayerName()}}</h5>
+            </div>
+            <div class="user">
+                <h5 [ngClass]="isPlayerActive(1) ? 'active' : 'inactive'">{{getSecondPlayerName()}}</h5>
+                <img [src]="getSecondPlayerAvatar()" alt="Avatar">
+            </div>
+        </div>
+
+        <div class="score">
+            <h3>{{getFirstPlayerScore()}}</h3>
+            <h3>{{getSecondPlayerScore()}}</h3>
+        </div>
+
+        <div class="power-label">
+            <h5>- IB: Increase ball speed </h5>
+            <h5>- BM: Minimize ball size</h5>
+            <h5>- IM: Increase move speed</h5>
+            <h5>- DM: Decrease move speed</h5>
+        </div>
+
+        <div class="paddle" 
+        [style.height.%]="getPaddleSize()" 
+        [style.width.%]="getBallSize() / 2"
+        [style.top.%]="getPaddleTop1()"></div>
+        <div class="paddle"
+        [style.height.%]="getPaddleSize()"
+        [style.width.%]="getBallSize() / 2"
+        [style.top.%]="getPaddleTop2()"
+        [style.left.%]="100 - getBallSize() / 2"></div>
+
+        <div class="ball" 
+        [style.top.%]="getBallTop()"
+        [style.left.%] = "getBallLeft()" 
+        [style.width.%]="getBallSize()"
+        [style.height.%]="getBallSize()"></div>
+
+        <div class="label" *ngIf="doShowLabel()">
+            <h4>{{getLabel()}}</h4>
+        </div>
+        <div class="powerDiv">
+            <div [ngClass]="selectedPower == 0 ? 'powerCase-select' : 'powerCase-unselect'">
+                <div [ngClass]="getPowerStatus()[0] == 1 ? 'powerCase-used' : 'powerCase-unused'">
+                    <h5>IB</h5>
+                </div>
+            </div>
+            <div [ngClass]="selectedPower == 1? 'powerCase-select' : 'powerCase-unselect'">
+                <div [ngClass]="getPowerStatus()[1] == 1 ? 'powerCase-used' : 'powerCase-unused'">
+                    <h5>BM</h5>
+                </div>
+            </div>
+            <div [ngClass]="selectedPower == 2 ? 'powerCase-select' : 'powerCase-unselect'">
+                <div [ngClass]="getPowerStatus()[2] == 1 ? 'powerCase-used' : 'powerCase-unused'">
+                    <h5>IM</h5>
+                </div>
+            </div>
+            <div [ngClass]="selectedPower == 3 ? 'powerCase-select' : 'powerCase-unselect'">
+                <div [ngClass]="getPowerStatus()[3] == 1 ? 'powerCase-used' : 'powerCase-unused'">
+                    <h5>DM</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

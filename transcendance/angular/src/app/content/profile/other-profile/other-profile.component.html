@@ -1,0 +1,126 @@
+<style>
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    .score-container {
+      width: 100%;
+      overflow-y: scroll;
+    }
+    
+    .chat-body {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: black;
+    }
+
+    .chat-messages {
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 0.5em;
+    }
+
+    .chat-messages p {
+      display: flex;
+    }
+  
+  
+    .divider{
+      width: 100%;
+      height: 1px;
+      background-color: rgb(163, 8, 194);
+    }
+
+    .buttonRow {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    .button
+    {
+        border-radius: 10px;
+        border: none;
+        font-size: calc(min(100vh, 100vw) * 0.03);
+        font-family: var(--text-font);
+        font-style: oblique;
+        font-weight: normal;
+        color: var(--accent-color);
+        font-weight: bold;
+        background-color: transparent;
+    }
+  
+    .button-selected
+    {
+        border-radius: 10px;
+        border: none;
+        font-size: calc(min(100vh, 100vw) * 0.03);
+        font-family: var(--text-font);
+        font-style: oblique;
+        font-weight: normal;
+        color: var(--primary-color);
+        font-weight: bold;
+        background-color: transparent;
+    }
+  
+    .button:hover
+    {
+        background-color: var(--accent-color);
+        color: var(--main-color);
+    }
+
+    .avatar {
+      width: min(10vh, 10vw);
+      height: min(10vh, 10vw);
+      border-radius: 50%;
+      border: 2px solid var(--accent-color);
+    }
+
+    .row{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+    }
+  
+  </style>
+  
+  <div id="content-screen">
+  <div class="chat-container">
+    <div [style.margin-top.vh]="5"></div>
+    <div class="row">
+      <img class="avatar" [src]="getAvatar()" alt="Avatar">
+      <h3 class="username">{{getName()}}</h3>
+      <p></p>
+    </div>
+    <div [style.margin-top.vh]="5"></div>
+    <div class="buttonRow">
+      <button [ngClass]="isSelected('status_button') ? 'button-selected' : 'button'" *ngIf="!isUserBlocked()" (mouseover)="naviguate(profileRoute('status_button'))" (click)="press('next')">{{label}}</button>
+      <div *ngIf="isFriend() && !isUserBlocked()">
+        <button [ngClass]="isSelected('chat_button') ? 'button-selected' : 'button'"  (mouseover)="naviguate(profileRoute('chat_button'))" (click)="press('next')">Chat</button>
+      </div>
+      <button [ngClass]="isSelected('block_button') ? 'button-selected' : 'button'"  (mouseover)="naviguate(profileRoute('block_button'))" (click)="press('next')">{{isUserBlocked() ? 'Unblock' : 'Block'}}</button>
+    </div>
+    <div [style.margin-top.vh]="5"></div>
+
+    <div #scrollContainer class="score-container">
+      <app-score [userName]="getInputName()"></app-score>
+    </div> 
+  </div>
+</div>

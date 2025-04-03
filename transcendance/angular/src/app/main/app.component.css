@@ -1,0 +1,142 @@
+@import "../../styles.css";
+
+#page {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--background-color);
+    box-shadow: inset min(1vh, 1vw) min(1vh, 1vw) min(1.5vh, 1.5vw) rgba(255, 255, 255, 0.1),
+                inset max(-1vh, -1vw) max(-1vh, -1vw) min(1.5vh, 1.5vw) black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#main-title {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#screen {
+    height: calc(100vh * 0.7);
+    width: calc(100vw * 0.6);
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: min(1vh, 1vw) min(1vh, 1vw) min(1.5vh, 1.5vw) rgba(255, 255, 255, 0.1),
+                max(-1vh, -1vw) max(-1vh, -1vw) min(1.5vh, 1.5vw) black;
+    position: relative;
+}
+
+.control {
+    margin: 0;
+    padding: 0;
+    width: calc(min(100vw * 0.2, 100vh * 0.7));
+    height: calc(min(100vw * 0.2, 100vh * 0.7));
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#left-control { justify-content: center; }
+
+#right-control { flex-direction: column; }
+
+#bottom-control {
+    width: calc(100vw * 0.6);
+    height: calc(100vh * 0.15);
+}
+
+#cross {
+    width: calc(min(100vw * 0.2, 100vh * 0.7) * 0.2);
+    height: calc(min(100vw * 0.2, 100vh * 0.7) * 0.2);
+    position: relative;
+}
+
+.button {
+    margin: 0;
+    padding: 0;
+    border: max(2px, min(0.4vw, 0.6vh)) solid var(--background-color);
+    background: radial-gradient(var(--secondary-color), var(--secondary-color), var(--primary-color));
+    background-color: var(--background-color);
+    box-shadow:
+        min(1vh, 1vw) min(1vh, 1vw) min(1.5vh, 1.5vw) black,
+        max(-0.5vh, -0.5vw) max(-0.5vh, -0.5vw) min(2vh, 2vw) rgba(255, 255, 255, 0.2),
+        inset min(1vh, 1vw) min(1vh, 1vw) min(1.5vh, 1.5vw) rgba(255, 255, 255, 0.2),
+        inset max(-0.5vh, -0.5vw) max(-0.5vh, -0.5vw) min(1vh, 1vw) rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:active,
+.selected {
+    border: max(3px, calc(min(0.4vw, 0.6vh) * 1.2)) solid var(--background-color);
+    box-shadow:
+        min(1vh, 1vw) min(1vh, 1vw) min(1.5vh, 1.5vw) black,
+        max(-0.5vh, -0.5vw) max(-0.5vh, -0.5vw) min(2vh, 2vw) rgba(255, 255, 255, 0.2),
+        inset min(1vh, 1vw) min(1vh, 1vw) min(1.5vh, 1.5vw) rgba(255, 255, 255, 0.2),
+        inset max(-0.5vh, -0.5vw) max(-0.5vh, -0.5vw) min(1vh, 1vw) rgba(0, 0, 0, 0.5),
+        inset min(0.5vh, 0.5vw) min(0.5vh, 0.5vw) min(1.5vh, 1.5vw) rgba(0, 0, 0, 0.3);
+}
+
+.left-button {
+    position: absolute;
+    border-radius: 15%;
+}
+
+.right-button {
+    position: relative;
+    background: radial-gradient(var(--secondary-color), var(--secondary-color), var(--secondary-color), var(--primary-color), var(--primary-color));
+    width: calc(min(100vw * 0.2, 100vh * 0.7) * 0.3);
+    height: calc(min(100vw * 0.2, 100vh * 0.7) * 0.3);
+    border-radius: 50%;
+}
+
+.bottom-button {
+    width: calc(min(100vw * 0.15 * 0.8, 250px));
+    height: calc(min(max(100vh, 100vw) * 0.15 * 0.2, 100vh * 0.15 * 0.5));
+    border-radius: 25%;
+}
+
+#up, #down {
+    width: calc(min(100vw * 0.2, 100vh * 0.7) * 0.2);
+    height: calc(min(100vw * 0.2, 100vh * 0.7) * 0.25);
+}
+
+#left, #right {
+    width: calc(min(100vw * 0.2, 100vh * 0.7) * 0.25);
+    height: calc(min(100vw * 0.2, 100vh * 0.7) * 0.2);
+}
+
+#up { transform: translateY(calc(-1 * min(100vw * 0.2, 100vh * 0.7) * 0.25)); }
+
+#right {  transform: translateX(calc(1 * min(100vw * 0.2, 100vh * 0.7) * 0.2)); }
+
+#left { transform: translateX(calc(-1 * min(100vw * 0.2, 100vh * 0.7) * 0.25)); }
+
+#down { transform: translateY(calc(1 * min(100vw * 0.2, 100vh * 0.7) * 0.2)); }
+
+#a { margin-left: calc(min(100vw * 0.2, 100vh * 0.7) * 0.3); }
+
+#b { margin-right: calc(min(100vw * 0.2, 100vh * 0.7) * 0.3); }
+
+#right-control h2 { font-size: calc(min(100vw * 0.2, 100vh * 0.7) * 0.3 * 0.5); }
+
+#bottom-control h2 {
+    font-size: calc(min(100vw * 0.15 * 0.15 * 0.5, 100vh * 0.15 * 0.5 * 0.4));
+    font-style: italic;
+}
+
+.button:active h2,
+.h2-selected {  font-size: calc(min(100vw * 0.2, 100vh * 0.7) * 0.3 * 0.3 * 0.96); }
+
+#right-control .button:active h2,
+#right-control .h2-selected { font-size: calc(min(100vw * 0.2, 100vh * 0.7) * 0.3 * 0.5 * 0.96); }
+
+#bottom-control .button:active h2,
+#bottom-control .h2-selected { font-size: calc(min(100vw * 0.15 * 0.15 * 0.5, 100vh * 0.15 * 0.5 * 0.4) * 0.96); }

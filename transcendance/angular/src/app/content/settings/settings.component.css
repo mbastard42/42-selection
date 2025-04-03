@@ -1,0 +1,133 @@
+@import "../../../styles.css";
+
+#content-screen { flex-wrap: wrap; }
+
+#title {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#top-content {
+    height: 60%;
+    width: 100%;
+    display: flex;
+}
+
+#left-content {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#center-content {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#info {
+    height: 80%;
+    width: 100%;
+    border-radius: 10px;
+    border: max(1px, min(0.2vw, 0.3vh)) solid var(--accent-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#right-content {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#bottom-content {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#cross {
+    width: calc(min(100vw * 0.2, 100vh * 0.7) * 0.2 * 0.75);
+    height: calc(min(100vw * 0.2, 100vh * 0.7) * 0.2 * 0.75);
+    position: relative;
+}
+
+.button {
+    margin: 0;
+    padding: 0;
+    border: max(1px, min(0.2vw, 0.3vh)) solid var(--accent-color);
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.b-selected {
+    background-color: antiquewhite !important;
+    border-color: black;
+}
+
+.h-selected {
+    color: black;
+}
+
+.left-button {
+    position: absolute;
+    border-radius: 15%;
+}
+
+.right-button {
+    position: relative;
+    width: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.3);
+    height: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.3);
+    border-radius: 50%;
+}
+
+.bottom-button {
+    width: calc(min(100vw * 0.15 * 0.8 * 0.6, 250px * 0.75));
+    height: calc(min(max(100vh * 0.7, 100vw * 0.6) * 0.15 * 0.2, 100vh * 0.15 * 0.5 * 0.7));
+    border-radius: 25%;
+}
+
+#up, #down {
+    width: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.2);
+    height: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.25);
+}
+
+#left, #right {
+    width: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.25);
+    height: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.2);
+}
+
+#up { transform: translateY(calc(-1 * min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.3)); }
+
+#right {  transform: translateX(calc(1 * min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.25)); }
+
+#left { transform: translateX(calc(-1 * min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.3)); }
+
+#down { transform: translateY(calc(1 * min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.25)); }
+
+#a {
+    margin-left: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.3);
+    margin-bottom: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.1);
+}
+
+#b {
+    margin-right: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.3);
+    margin-top: calc(min(100vw * 0.2 * 0.6, 100vh * 0.7 * 0.7) * 0.1);
+}
+
+h4, h5, h6 { font-style: normal; }
